@@ -14,6 +14,14 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def json_id_current_user
+		@id = 0
+		if sess_loggedin?
+			@id = sess_current_user.id
+			render json: { id: @id }
+		end
+	end
+
 	def create
 		@user = User.new(user_params)
 		if @user.save

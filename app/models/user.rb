@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-	has_many :campaigns
+	has_many :campaigns, dependent: :destroy
 
 	EMAIL_VALDATION_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i # Credit to stackoverflow
 

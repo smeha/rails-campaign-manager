@@ -1,19 +1,36 @@
 class CampaignsController < ApplicationController
 	before_action :logged_in_user
 
-	def home
-	end
-
 	def new
-		@campaign  = current_user.campiagns.new
+		@campaign  = sess_current_user.campiagns.new
 	end
 
 	def index
-		@campaign = Campaign.all
+		#puts params.inspect
+		#@campaign = Campaign.all
+		@campaign = sess_current_user.campaigns.all
 	end
 
+	def create_json
+		if sess_loggedin?
+			@campaign = sess_current_user.campaigns.build(campaign_params)
+			@campaign.save
+			# respond_to do |format|
+			# 	if @campaign.save
+			# 		format.json { render :show, status: :created, location: api_v1_todo_item_path(@campaign) }
+			# 	else
+			# 		format.json { render json: @campaign.errors, status: :unprocessable_entity }
+			# 	end
+			# end
+		end
+	end
+
+	def show_json
+		
+	end
+	
 	def create
-		@campaign = current_user.campaigns.build(item_params)
+		@campaign = sess_current_user.campaigns.build(campaign_params)
 		if @campaign.save
 			flash[:success] = "New campaign has been created!"
 			redirect_to @campaign
@@ -23,11 +40,11 @@ class CampaignsController < ApplicationController
 	end
 
 	def edit
-		@campaign = current_user.campaigns.find(params[:id])
+		@campaign = sess_current_user.campaigns.find(params[:id])
 	end
 
 	def update
-		@campaign = current_user.campaigns.find(params[:id])
+		@campaign = sess_current_user.campaigns.find(params[:id])
 		if @campaign.update_attributes(campaign_params)
 			flash[:success] = "The campaign has been updated"
 			redirect_to @campaign
@@ -37,7 +54,7 @@ class CampaignsController < ApplicationController
 	end
 
 	def destroy
-		@campaign = current_user.campaigns.find(params[:id])
+		@campaign = sess_current_user.campaigns.find(params[:id])
 	if @campaign 
 		@campaign.destroy
 		flash[:success] = "The campaign has been deleted"
@@ -48,12 +65,14 @@ class CampaignsController < ApplicationController
 	end
 
 	def show
-		@campaign = Campaign.find(params[:id])
+		#puts params[:user_id]
+		#@campaign = Campaign.where(:user_id => params[:user_id])
+		@campaign = Campaign.find_by(params[:id])
 	end
 
 	private
 	def campaign_params
-		params.require(:campaign).permit(:name,:start_date,:end_date)
+		params.require(:campaign).permit(:name,:start_date,:end_date, :end_time, :start_time)
 	end
 
 end

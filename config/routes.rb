@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 	root "cmanager#index"
 	get 'cmanager/index'
-	resources :users
+	# get '/campaigns/:id', to: 'campaigns#show', as: 'campaigns'
+	get '/getuserid', to: 'users#json_id_current_user'
+	post '/newcampaign', to: 'campaigns#create_json'
+	get '/showcampaign', to: 'campaigns#show_json'
+	resources :users do
+		resources :campaigns
+	end
+	#resources :campaigns
 	
 	# Authentication 
 	get '/newuser', to: 'users#new'

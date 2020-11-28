@@ -14,18 +14,18 @@
     <!-- Navigation bar for whole app -->
     <nav class="navbar">
       <div class="container-fluid">
+        <ul class="nav navbar-left">
+          <li class="mx-3"><%= link_to "Home", root_url %></li>  
         <% if sess_loggedin? %>
-          <ul class="nav navbar-left">
             <% @user ||= User.find_by(id: session[:user_id]) %>
+            <li class="mx-3"><%= link_to "Campaigns", user_campaigns_path(@user) %></li> 
             <li class="mx-3"><%= link_to "User Profile", user_path(@user) %></li> 
             <li class="mx-3"><%= link_to "Logout", logout_path, method: :delete %></li> 
-          </ul>
         <% else %>
-          <ul class="nav navbar-left">
             <li class="mx-3"><%= link_to "New User Sign Up", newuser_path %></li>
-            <li class="mx-3"><%= link_to "Login", login_path %></li> 
-          </ul>
+            <li class="mx-3"><%= link_to "Login", login_path %></li>           
         <% end %>
+        </ul>
       </div>
     </nav>
 
