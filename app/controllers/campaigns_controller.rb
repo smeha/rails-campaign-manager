@@ -87,7 +87,7 @@ class CampaignsController < ApplicationController
 
 	private
 	def campaign_params
-		params.require(:campaign).permit(:name,:start_date,:end_date, :end_time, :start_time)
+		params.require(:campaign).permit(:name,:start_date,:end_date, :end_time, :start_time, :banners_id)
 	end
 
 end

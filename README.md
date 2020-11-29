@@ -16,6 +16,9 @@ Requires csrf token, in order to check the logged in
 * POST `/newcampaign` - create new campaign 
 * GET `/showcampaign` - displays all campaigns that belong to user
 * DELETE `/deletecampaign/:id` - deletes specific campaign specified by ID
+* POST `/newbanner` - create new banner 
+* GET `/showbanner` - displays all banners that belong to user
+* DELETE `/deletebanner/:id` - deletes specific banners specified by ID, attached campaigns will be deleted as well
 
 ## Planned Implementation
 * Separate API instead of built in to controllers calls

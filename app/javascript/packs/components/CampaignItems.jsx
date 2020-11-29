@@ -17,6 +17,7 @@ class CampaignItems extends React.Component {
                 <th scope="col">End Date</th>
                 <th scope="col">Start Time</th>
                 <th scope="col">End Time</th>
+                <th scope="col">Banner Name</th>
                 <th scope="col" className="text-center">Delete</th>
               </tr>
             </thead>

@@ -31,22 +31,12 @@ class BannerItem extends React.Component {
     return (
       <tr className='table-light'>
         <td>
-          <input
-            type="text"
-            defaultValue={bannerItem.name}
-            disabled={true}
-            className="form-control"
-            id={`bannerItem__name-${bannerItem.id}`}
-          />
+          <span id={`bannerItem__name-${bannerItem.id}`} >{bannerItem.name}</span>
         </td>
         <td>
-          <input
-            type="text"
-            defaultValue={bannerItem.text}
-            disabled={true}
-            className="form-control"
-            id={`bannerItem__text-${bannerItem.id}`}
-          />
+          <p className="text-break" >
+          {bannerItem.text}
+          </p>
         </td>
         <td className="text-right">          
           <button 

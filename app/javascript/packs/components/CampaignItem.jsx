@@ -16,6 +16,7 @@ class CampaignItem extends React.Component {
     };
 
     this.handleDestroy = this.handleDestroy.bind(this);
+    this.getBannerName = this.getBannerName.bind(this);
     this.path = `/deletecampaign/${this.props.campaignItem.id}`;
   }
 
@@ -32,55 +33,38 @@ class CampaignItem extends React.Component {
         });
     }
   }
-
+  getBannerName(idToSearch) {
+    let temp =  this.props.bannerItems.filter(item => {
+      return item.id === idToSearch
+    });
+    if(temp[0]){
+      return temp[0].name;
+    }else{
+      return '';
+    }
+    
+  };
   render() {
     const { campaignItem } = this.props
     return (
       <tr className='table-light'>
         <td>
-          <input
-            type="text"
-            defaultValue={campaignItem.name}
-            disabled={true}
-            className="form-control"
-            id={`campaignItem__name-${campaignItem.id}`}
-          />
+          <span id={`campaignItem__name-${campaignItem.id}`}>{campaignItem.name}</span>
         </td>
         <td>
-          <input
-            type="text"
-            defaultValue={this.state.startDate}
-            disabled={true}
-            className="form-control"
-            id={`campaignItem__start_date-${campaignItem.id}`}
-          />
+          <span id={`campaignItem__start_date-${campaignItem.id}`}>{this.state.startDate}</span>
         </td>
         <td>
-          <input
-            type="text"
-            defaultValue={this.state.endDate}
-            disabled={true}
-            className="form-control"
-            id={`campaignItem__end_date-${campaignItem.id}`}
-          />
+          <span id={`campaignItem__end_date-${campaignItem.id}`}>{this.state.endDate}</span>
         </td>
         <td>
-          <input
-            type="text"
-            defaultValue={this.state.startTime}
-            disabled={true}
-            className="form-control"
-            id={`campaignItem__start_time-${campaignItem.id}`}
-          />
+          <span id={`campaignItem__start_time-${campaignItem.id}`}>{this.state.startTime}</span>
         </td>
         <td>
-          <input
-            type="text"
-            defaultValue={this.state.endTime}
-            disabled={true}
-            className="form-control"
-            id={`campaignItem__end_time-${campaignItem.id}`}
-          />
+          <span id={`campaignItem__end_time-${campaignItem.id}`}>{this.state.endTime}</span>
+        </td>
+        <td>
+          <span id={`campaignItem__banner_name-${campaignItem.id}`}>{this.getBannerName(campaignItem.banners_id)}</span>
         </td>
         <td className="text-right">          
           <button 
@@ -96,5 +80,6 @@ export default CampaignItem
 
 CampaignItem.propTypes = {
   campaignItem: PropTypes.object.isRequired,
+  bannerItems: PropTypes.array.isRequired,
   getCampaignItems: PropTypes.func.isRequired,
 }

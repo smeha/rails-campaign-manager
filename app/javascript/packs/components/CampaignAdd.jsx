@@ -20,6 +20,7 @@ class CampaignAdd extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameRef = React.createRef();
+    this.banneridRef = React.createRef();
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);  
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this); 
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this); 
@@ -37,6 +38,7 @@ class CampaignAdd extends React.Component {
           start_date: Moment(this.state.startDate).format("DD/MM/yyyy"),
           start_time: Moment(this.state.startTime).format("HH:mm"),
           end_time: Moment(this.state.endTime).format("HH:mm"),
+          banners_id: this.banneridRef.current.value,
         },
       })
       .then(response => {
@@ -74,7 +76,7 @@ class CampaignAdd extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} className="my-3 mx-4">
         <div className="form-row">
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-6">
             <input
               type="text"
               name="name"
@@ -84,15 +86,23 @@ class CampaignAdd extends React.Component {
               id="name"
               placeholder="Campaign name"
             />
-          </div>
-          <div className="form-group col-md-4">
+          </div> 
+          <div className="form-group col-md-5">
             <button className="btn btn-outline-success btn-block">
               Add Campaign
             </button>
           </div>
         </div>
-        <div className="form-row">
-        <div className="form-group col-md-3">
+        <div className="form-row form-inline">
+        <div className="form-group col-md-2"> 
+            <label className="mx-1">Select Banner</label>   
+            <select name="banners_id" ref={this.banneridRef} className="form-control" required>
+                {this.props.bannerItems.map((obj) => {
+                     return <option key={obj.id} value={obj.id}>{obj.name}</option>
+                 })}
+             </select>    
+        </div>
+        <div className="form-group col-md-2">
             <label className="mx-1">Start Date</label>
             <DatePicker
               selected={ this.state.startDate }
@@ -103,7 +113,7 @@ class CampaignAdd extends React.Component {
               dateFormat="MM/dd/yyyy"
             />
           </div>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-2">
             <label className="mx-1">End Date</label>
             <DatePicker
               selected={ this.state.endDate }
@@ -114,7 +124,7 @@ class CampaignAdd extends React.Component {
               dateFormat="MM/dd/yyyy"
             />
           </div>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-2">
             <label className="mx-1">Start Time</label>
             <DatePicker
               selected={this.state.startTime}
@@ -126,7 +136,7 @@ class CampaignAdd extends React.Component {
               dateFormat="h:mm aa"
             />
           </div>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-2">
             <label className="mx-1">End Time</label>
             <DatePicker
               selected={this.state.endTime}

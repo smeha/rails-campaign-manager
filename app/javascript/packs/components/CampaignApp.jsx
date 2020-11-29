@@ -10,9 +10,11 @@ class CampaignApp extends React.Component {
 		super(props);
 		this.state = {
 			// currentUser: null,
-			campaignItems: []
+			campaignItems: [],
+			bannerItems: []
 		};
 		this.getCampaignItems = this.getCampaignItems.bind(this);
+		this.getBannerItems = this.getBannerItems.bind(this);
 		// this.updateCurrentUser = this.updateCurrentUser.bind(this);
 		this.createCampaignItem = this.createCampaignItem.bind(this);
 
@@ -21,6 +23,7 @@ class CampaignApp extends React.Component {
 	componentDidMount() {
 		// this.updateCurrentUser();
 		this.getCampaignItems();
+		this.getBannerItems();
 	}
 	componentDidUpdate(){		
 		// this.getCampaignItems();
@@ -42,6 +45,17 @@ class CampaignApp extends React.Component {
 	// 	})
 	// }
 
+	getBannerItems() {
+		axios.get("/showbanner/")
+		.then(response => {
+			const bannerItems = response.data;
+			this.setState({ bannerItems });
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}
+
 	getCampaignItems() {
 		axios.get("/showcampaign/")
 		.then(response => {
@@ -55,12 +69,16 @@ class CampaignApp extends React.Component {
   render() {
      return (
      	<>
-	     <CampaignAdd createCampaignItem={this.createCampaignItem} />
+	     <CampaignAdd 
+		     createCampaignItem={this.createCampaignItem} 
+		     bannerItems={this.state.bannerItems} 
+	     />
 	      <CampaignItems>
 	        {this.state.campaignItems.map(campaignItem => (
 	          <CampaignItem 
 	          key={campaignItem.id} 
-	          campaignItem={campaignItem} 
+	          campaignItem={campaignItem}
+	          bannerItems={this.state.bannerItems}
 	          getCampaignItems={this.getCampaignItems}
 	          />
 	        ))}
