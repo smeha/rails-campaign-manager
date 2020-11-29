@@ -19,8 +19,12 @@ Requires csrf token, in order to check the logged in
 
 ## Planned Implementation
 * Separate API instead of built in to controllers calls
- * Still can be used with crsf login token 
+  * Still can be used with crsf login token 
 * Images/GIF/Videos need to be added to banner implementation
+
+
+
+
 
 ## Assignment 
 For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
