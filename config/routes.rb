@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 	root "cmanager#index"
 	get 'cmanager/index'
-	# get '/campaigns/:id', to: 'campaigns#show', as: 'campaigns'
+	
+	# ReactJS Callbacks
 	get '/getuserid', to: 'users#json_id_current_user'
 	post '/newcampaign', to: 'campaigns#create_json'
 	get '/showcampaign', to: 'campaigns#show_json'
+	delete '/deletecampaign/:id', to: 'campaigns#destroy_json'
+
 	resources :users do
 		resources :campaigns
 	end

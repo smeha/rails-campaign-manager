@@ -9,52 +9,41 @@ class CampaignApp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentUser: null,
+			// currentUser: null,
 			campaignItems: []
 		};
 		this.getCampaignItems = this.getCampaignItems.bind(this);
-		this.updateCurrentUser = this.updateCurrentUser.bind(this);
+		// this.updateCurrentUser = this.updateCurrentUser.bind(this);
 		this.createCampaignItem = this.createCampaignItem.bind(this);
 
 	}
 
 	componentDidMount() {
-		this.updateCurrentUser();
+		// this.updateCurrentUser();
+		this.getCampaignItems();
 	}
 	componentDidUpdate(){		
-		this.getCampaignItems();
+		// this.getCampaignItems();
 	}
 	createCampaignItem(campaignItem) {
 		const campaignItems = [campaignItem, ...this.state.campaignItems];
 		this.setState({ campaignItems });
 	}
-	updateCurrentUser() {
-		axios.get('/getuserid',{
-		}).then(response => {
-			if(response.data.id){
-				this.setState({ currentUser: response.data.id});
-			}else{
-				this.setState({ currentUser: null });
-			}
-		}).catch(function(error){
-			console.log(error);
-		})
-	}
+	// updateCurrentUser() {
+	// 	axios.get('/getuserid',{
+	// 	}).then(response => {
+	// 		if(response.data.id){
+	// 			this.setState({ currentUser: response.data.id});
+	// 		}else{
+	// 			this.setState({ currentUser: null });
+	// 		}
+	// 	}).catch(function(error){
+	// 		console.log(error);
+	// 	})
+	// }
 
 	getCampaignItems() {
-		// NEED TO COME BACK TO THIS
-		var cur_user_id  = this.state.currentUser;
-		// axios.get('/getuserid',{
-		// }).then(response => {
-		// 	if(response.data.id){
-		// 		testVarible = response.data.id;
-		// 	}
-		// }).catch(function(error){
-		// 	console.log(error);
-		// })		
-		console.log(cur_user_id);
-		axios
-		.get("/showcampaign/"+cur_user_id)
+		axios.get("/showcampaign/")
 		.then(response => {
 			const campaignItems = response.data;
 			this.setState({ campaignItems });
@@ -69,7 +58,11 @@ class CampaignApp extends React.Component {
 	     <CampaignAdd createCampaignItem={this.createCampaignItem} />
 	      <CampaignItems>
 	        {this.state.campaignItems.map(campaignItem => (
-	          <CampaignItem key={campaignItem.id} campaignItem={campaignItem} />
+	          <CampaignItem 
+	          key={campaignItem.id} 
+	          campaignItem={campaignItem} 
+	          getCampaignItems={this.getCampaignItems}
+	          />
 	        ))}
 	      </CampaignItems>
       </>

@@ -6,7 +6,6 @@ class CampaignsController < ApplicationController
 	end
 
 	def index
-		#puts params.inspect
 		#@campaign = Campaign.all
 		@campaign = sess_current_user.campaigns.all
 	end
@@ -14,19 +13,37 @@ class CampaignsController < ApplicationController
 	def create_json
 		if sess_loggedin?
 			@campaign = sess_current_user.campaigns.build(campaign_params)
-			@campaign.save
-			# respond_to do |format|
-			# 	if @campaign.save
-			# 		format.json { render :show, status: :created, location: api_v1_todo_item_path(@campaign) }
-			# 	else
-			# 		format.json { render json: @campaign.errors, status: :unprocessable_entity }
-			# 	end
-			# end
+			if @campaign.save
+				render :json => @campaign.to_json, :status => :created
+			else
+				render :json => @campaign.errors.to_json, :status => :unprocessable_entity 
+			end
+		else			
+			render json: { error: 'unauthorized' }
 		end
 	end
 
+	def destroy_json
+		if sess_loggedin?
+			@campaign = sess_current_user.campaigns.find(params[:id])
+			if @campaign 
+				@campaign.destroy
+				respond_to do |format|
+					format.html
+      				format.json { head :no_content }
+				end
+			end
+		else			
+			render json: { error: 'unauthorized' }
+		end
+	end
 	def show_json
-		
+		if sess_loggedin?
+			@campaign = sess_current_user.campaigns.all
+			render json:  @campaign.to_json 
+		else			
+			render json: { error: 'unauthorized' }
+		end
 	end
 	
 	def create
@@ -65,8 +82,6 @@ class CampaignsController < ApplicationController
 	end
 
 	def show
-		#puts params[:user_id]
-		#@campaign = Campaign.where(:user_id => params[:user_id])
 		@campaign = Campaign.find_by(params[:id])
 	end
 

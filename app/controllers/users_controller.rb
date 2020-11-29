@@ -19,6 +19,8 @@ class UsersController < ApplicationController
 		if sess_loggedin?
 			@id = sess_current_user.id
 			render json: { id: @id }
+		else
+			render json: { error: 'unauthorized' }
 		end
 	end
 

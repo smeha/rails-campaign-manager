@@ -1,66 +1,91 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import axios from "axios";
+import setAxiosHeaders from "./AxiosHeaders";
+
+import Moment from 'moment';
 class CampaignItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      complete: this.props.campaignItem.complete,
+      startDate: Moment(this.props.campaignItem.start_date).format("MM/DD/yyyy"),
+      endDate: Moment(this.props.campaignItem.end_date).format("MM/DD/yyyy"),
+      startTime: this.props.campaignItem.start_time ? Moment.utc(this.props.campaignItem.start_time).format("h:mm a") : '',
+      endTime: this.props.campaignItem.end_time ? Moment.utc(this.props.campaignItem.end_time).format("h:mm a") : '' ,
+    };
+
+    this.handleDestroy = this.handleDestroy.bind(this);
+    this.path = `/deletecampaign/${this.props.campaignItem.id}`;
+  }
+
+  handleDestroy() {
+    setAxiosHeaders();
+    const confirmation = confirm("Delete '"+this.props.campaignItem.name+"'?");
+    if (confirmation) {
+      axios.delete(this.path)
+        .then(response => {
+          this.props.getCampaignItems();
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
+
   render() {
     const { campaignItem } = this.props
     return (
-      <tr className={`${this.state.complete ? 'table-light' : ''}`}>
+      <tr className='table-light'>
         <td>
-          <svg
-            className={`bi bi-check-circle ${
-              this.state.complete ? `text-success` : `text-muted`
-            }`}
-            width="2em"
-            height="2em"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M17.354 4.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L10 11.293l6.646-6.647a.5.5 0 01.708 0z"
-              clipRule="evenodd"
-            />
-            <path
-              fillRule="evenodd"
-              d="M10 4.5a5.5 5.5 0 105.5 5.5.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 0010 4.5z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <input
+            type="text"
+            defaultValue={campaignItem.name}
+            disabled={true}
+            className="form-control"
+            id={`campaignItem__name-${campaignItem.id}`}
+          />
         </td>
         <td>
           <input
             type="text"
-            defaultValue={campaignItem.title}
-            disabled={this.state.complete}
+            defaultValue={this.state.startDate}
+            disabled={true}
             className="form-control"
-            id={`campaignItem__title-${campaignItem.id}`}
+            id={`campaignItem__start_date-${campaignItem.id}`}
           />
         </td>
-        <td className="text-right">
-          <div className="form-check form-check-inline">
-            <input
-              type="boolean"
-              defaultChecked={this.state.complete}
-              type="checkbox"
-              className="form-check-input"
-              id={`complete-${campaignItem.id}`}
-            />
-            <label
-              className="form-check-label"
-              htmlFor={`complete-${campaignItem.id}`}
-            >
-              Complete?
-            </label>
-          </div>
-          <button className="btn btn-outline-danger">Delete</button>
+        <td>
+          <input
+            type="text"
+            defaultValue={this.state.endDate}
+            disabled={true}
+            className="form-control"
+            id={`campaignItem__end_date-${campaignItem.id}`}
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            defaultValue={this.state.startTime}
+            disabled={true}
+            className="form-control"
+            id={`campaignItem__start_time-${campaignItem.id}`}
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            defaultValue={this.state.endTime}
+            disabled={true}
+            className="form-control"
+            id={`campaignItem__end_time-${campaignItem.id}`}
+          />
+        </td>
+        <td className="text-right">          
+          <button 
+          onClick={this.handleDestroy}
+          className="btn btn-outline-danger">Delete</button>
         </td>
       </tr>
     )
@@ -71,4 +96,5 @@ export default CampaignItem
 
 CampaignItem.propTypes = {
   campaignItem: PropTypes.object.isRequired,
+  getCampaignItems: PropTypes.func.isRequired,
 }

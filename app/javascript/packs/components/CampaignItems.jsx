@@ -4,6 +4,7 @@ class CampaignItems extends React.Component {
   constructor(props) {
     super(props)
   }
+
   render() {
     return (
       <>
@@ -12,9 +13,11 @@ class CampaignItems extends React.Component {
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col" className="text-right">
-                  Actions
-                </th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col" className="text-center">Delete</th>
               </tr>
             </thead>
             <tbody>{this.props.children}</tbody>

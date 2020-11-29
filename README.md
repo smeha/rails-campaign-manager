@@ -5,7 +5,7 @@
 * Rails 6.0.3.4
 * PostgreSQL 13.1
 * NodeJS and Yarn required for webpacker
-* ReactJS added, but not sure if it will be used yet
+* ReactJS
 
 ## Assignment 
 For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
