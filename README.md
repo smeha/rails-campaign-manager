@@ -1,11 +1,26 @@
-## Installation and Environment
+## Installation and Environment Used
 * Mac OSX Catalina
 * Ruby through brew (the funky way now in Catalina)
   * ruby 2.7.2p137
 * Rails 6.0.3.4
 * PostgreSQL 13.1
-* NodeJS and Yarn required for webpacker
-* ReactJS
+* NodeJS v14.15.1 and Yarn 1.22.10 required for webpacker
+* ReactJS 17.0.1
+* BootStrap CSS 4.5.2
+
+## Usage
+
+### Unfinished API 
+Requires csrf token, in order to check the logged in
+* GET `/getuserid` - gets users ID
+* POST `/newcampaign` - create new campaign 
+* GET `/showcampaign` - displays all campaigns that belong to user
+* DELETE `/deletecampaign/:id` - deletes specific campaign specified by ID
+
+## Planned Implementation
+* Separate API instead of built in to controllers calls
+ * Still can be used with crsf login token 
+* Images/GIF/Videos need to be added to banner implementation
 
 ## Assignment 
 For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.

@@ -12,10 +12,6 @@ import Moment from 'moment';
 class CampaignAdd extends React.Component {
   constructor(props) {
     super(props)
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
     this.state = {
       startDate: new Date(),
       endDate: new Date(),

@@ -19,6 +19,7 @@
         <% if sess_loggedin? %>
             <% @user ||= User.find_by(id: session[:user_id]) %>
             <li class="mx-3"><%= link_to "Campaigns", user_campaigns_path(@user) %></li> 
+            <li class="mx-3"><%= link_to "Banners", user_banners_path(@user) %></li> 
             <li class="mx-3"><%= link_to "User Profile", user_path(@user) %></li> 
             <li class="mx-3"><%= link_to "Logout", logout_path, method: :delete %></li> 
         <% else %>

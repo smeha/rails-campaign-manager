@@ -71,6 +71,6 @@ class CampaignApp extends React.Component {
 }
 
 document.addEventListener('turbolinks:load', () => {
-  const app = document.getElementById('campaign-add')
+  const app = document.getElementById('campaign-app')
   app && ReactDOM.render(<CampaignApp />, app)
 })
