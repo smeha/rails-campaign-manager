@@ -11,8 +11,17 @@
 
 ## Usage
 
+`git clone https://github.com/smeha/rails-campaign-manager`
+`bundle install`
+`yarn install --check-files`
+`rails db:create`
+`rails db:migrate`
+`rails s`
+
 ### Test inputs aka seeds 
 Once application is ready to use. For simple prefilled inputs, use test seeds provided by me: `rails db:seed`
+
+Test user is email: `test@test.com` password: `test`
 
 ### Gathering Available Banner
 `/publicbanner` - available unprotected URL for gathering available banners
