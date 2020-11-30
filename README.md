@@ -12,10 +12,15 @@
 ## Usage
 
 `git clone https://github.com/smeha/rails-campaign-manager`
+
 `bundle install`
+
 `yarn install --check-files`
+
 `rails db:create`
+
 `rails db:migrate`
+
 `rails s`
 
 ### Test inputs aka seeds 
