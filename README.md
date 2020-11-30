@@ -7,10 +7,18 @@
 * NodeJS v14.15.1 and Yarn 1.22.10 required for webpacker
 * ReactJS 17.0.1
 * BootStrap CSS 4.5.2
+* https://tools.keycdn.com as external API for user's IP information
 
 ## Usage
 
-For simple prefilled inputs, use test seeds provided by me: `rails db:seed`
+### Test inputs aka seeds 
+Once application is ready to use. For simple prefilled inputs, use test seeds provided by me: `rails db:seed`
+
+### Gathering Available Banner
+`/publicbanner` - available unprotected URL for gathering available banners
+* It has an option of passing IP for gathering IP information in order to display proper banner
+* `/publicbanner/xxx.xxx.xxx.xxx`
+* Example: `/publicbanner/195.110.64.205`
 
 ### Unfinished API 
 Requires csrf token, in order to check the logged in
@@ -23,10 +31,13 @@ Requires csrf token, in order to check the logged in
 * DELETE `/deletebanner/:id` - deletes specific banners specified by ID, attached campaigns will be deleted as well
 
 ## Planned Implementation
+* RSPEC or Rails tests
 * Separate API instead of built in to controllers calls
   * Still can be used with crsf login token 
 * Images/GIF/Videos need to be added to banner implementation
+
 <br /><br /><br />
+
 ## Assignment 
 For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
 

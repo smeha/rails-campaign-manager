@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 	get '/showbanner', to: 'banners#show_json'
 	delete '/deletebanner/:id', to: 'banners#destroy_json'
 	# Public URL for banners
-	get '/showbanner', to: 'cmanager#get_public_banner'
+	get '/publicbanner(/*ip)', to: 'cmanager#get_public_banner', format: false
 
 	resources :users do
 		resources :campaigns
