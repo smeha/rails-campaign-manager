@@ -10,6 +10,8 @@
 
 ## Usage
 
+For simple prefilled inputs, use test seeds provided by me: `rails db:seed`
+
 ### Unfinished API 
 Requires csrf token, in order to check the logged in
 * GET `/getuserid` - gets users ID
@@ -24,11 +26,7 @@ Requires csrf token, in order to check the logged in
 * Separate API instead of built in to controllers calls
   * Still can be used with crsf login token 
 * Images/GIF/Videos need to be added to banner implementation
-
-
-
-
-
+<br /><br /><br />
 ## Assignment 
 For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
 
