@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import axios from "axios";
 import CampaignItems from "./CampaignItems";
 import CampaignItem from "./CampaignItem";
 import CampaignAdd from "./CampaignAdd";
+import mountReactRoot from "./mountReactRoot";
 
 class CampaignApp extends React.Component {
 	constructor(props) {
@@ -89,6 +89,5 @@ class CampaignApp extends React.Component {
 }
 
 document.addEventListener('turbo:load', () => {
-  const app = document.getElementById('campaign-app')
-  app && ReactDOM.render(<CampaignApp />, app)
+  mountReactRoot("campaign-app", CampaignApp)
 })

@@ -28,6 +28,6 @@ module SessionsHelper
   end
 
   def sess_path
-    session[:forwarding_url] = request.original_url if request.get?
+    session[:forwarding_url] = request.original_url if request.get? || request.head?
   end
 end

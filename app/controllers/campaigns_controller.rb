@@ -82,7 +82,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = Campaign.find_by(params[:id])
+    @campaign = sess_current_user.campaigns.find(params[:id])
   end
 
   private

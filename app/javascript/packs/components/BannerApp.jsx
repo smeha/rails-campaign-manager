@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import axios from "axios";
 import BannerItems from "./BannerItems";
 import BannerItem from "./BannerItem";
 import BannerAdd from "./BannerAdd";
+import mountReactRoot from "./mountReactRoot";
 
 class BannerApp extends React.Component {
 	constructor(props) {
@@ -54,6 +54,5 @@ class BannerApp extends React.Component {
 }
 
 document.addEventListener('turbo:load', () => {
-  const app = document.getElementById('banner-app')
-  app && ReactDOM.render(<BannerApp />, app)
+  mountReactRoot("banner-app", BannerApp)
 })

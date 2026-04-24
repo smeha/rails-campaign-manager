@@ -6,7 +6,7 @@
 * Bundler (4.0.10)
 * RSpec-Rails (v8.0)
 * Node.js and npm required for the JS build
-* ReactJS 17.0.1
+* ReactJS 19.2.5
 * BootStrap CSS 4.5.2
 * RuboCop (via rubocop-rails-omakase + rubocop-performance + rubocop-rspec)
 * https://tools.keycdn.com as external API for user's IP information
@@ -36,12 +36,32 @@ rails s
 npm run build:watch
 ```
 
+## Linting, tests, type checking and audits
+### RuboCop
+```bash
+rubocop
+rubocop -a  # auto-fix safe offenses
+```
+
+## Run test cases
+```bash
+rspec
+```
+
+## Application audits
+```bash
+brakeman --no-pager
+bundler-audit
+npm audit --audit-level=moderate
+rails zeitwerk:check
+```
+
 ## Usage
 
-### Test inputs aka seeds 
-Once application is ready to use. For simple prefilled inputs, use test seeds provided by seeds.
+### Seed inputs
+Once application is ready to use. For simple prefilled inputs, use the provided seeds.
 
-Test user is email: `test@test.com` password: `test`
+Seed user is email: `demo@example.com` password: `demo123`
 
 ### Gathering Available Banner
 `/publicbanner` - available unprotected URL for gathering available banners
@@ -60,15 +80,12 @@ Requires csrf token, in order to check the logged in
 * DELETE `/deletebanner/:id` - deletes specific banners specified by ID, attached campaigns will be deleted as well
 
 ## Planned Implementation
-* RSPEC or Rails tests
 * Separate API instead of built in to controllers calls
   * Still can be used with crsf login token 
 * Images/GIF/Videos need to be added to banner implementation
 
-<br /><br /><br />
-
 ## Assignment 
-For our test you will be building a super simple advertising platform! This is an application that handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
+The assignment was to build a super simple advertising platform. This application handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
 
 In order to be simple, campaigns will only need a name, a start date and an end date.
 
@@ -94,7 +111,6 @@ Expected results:
 
 Additional notes:
 * We like clean, efficient code that your teammates will feel comfortable working with and improving
-* We like tests
 * Forget about the deployment of the application. Just having it work in a normal macOS or Linux laptop will do
 * You can forget about styling the pages, too. Raw HTML with no flashy CSS is fine
 * You can skip any part of the assignment if you feel it’s too complex or doesn’t make sense, as long as you give us a good reason for that. We are not going to use this code, we want to see how you work and think
