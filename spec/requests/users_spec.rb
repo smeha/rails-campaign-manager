@@ -69,11 +69,11 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /getuserid" do
+  describe "GET /api/v1/current_user" do
     it "returns an unauthorized payload for guests" do
-      get "/getuserid"
+      get "/api/v1/current_user"
 
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:unauthorized)
       expect(parsed_json_body).to eq("error" => "unauthorized")
     end
 
@@ -81,10 +81,10 @@ RSpec.describe "Users", type: :request do
       user = create_user(name: "Current User", email: "current-user@example.com")
       sign_in_as(user)
 
-      get "/getuserid"
+      get "/api/v1/current_user"
 
       expect(response).to have_http_status(:ok)
-      expect(parsed_json_body).to eq("id" => user.id)
+      expect(parsed_json_body).to include("id" => user.id, "name" => "Current User", "email" => "current-user@example.com")
     end
   end
 end

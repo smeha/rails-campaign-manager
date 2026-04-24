@@ -9,15 +9,15 @@ class CampaignItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      startDate: Moment(this.props.campaignItem.start_date).format("MM/DD/yyyy"),
-      endDate: Moment(this.props.campaignItem.end_date).format("MM/DD/yyyy"),
+      startDate: Moment(this.props.campaignItem.start_date).format("MM/DD/YYYY"),
+      endDate: Moment(this.props.campaignItem.end_date).format("MM/DD/YYYY"),
       startTime: this.props.campaignItem.start_time ? Moment.utc(this.props.campaignItem.start_time).format("h:mm a") : '',
       endTime: this.props.campaignItem.end_time ? Moment.utc(this.props.campaignItem.end_time).format("h:mm a") : '' ,
     };
 
     this.handleDestroy = this.handleDestroy.bind(this);
     this.getBannerName = this.getBannerName.bind(this);
-    this.path = `/deletecampaign/${this.props.campaignItem.id}`;
+    this.path = `/api/v1/campaigns/${this.props.campaignItem.id}`;
   }
 
   handleDestroy() {
@@ -35,7 +35,7 @@ class CampaignItem extends React.Component {
   }
   getBannerName(idToSearch) {
     let temp =  this.props.bannerItems.filter(item => {
-      return item.id === idToSearch
+      return item.id === Number(idToSearch)
     });
     if(temp[0]){
       return temp[0].name;
@@ -64,7 +64,7 @@ class CampaignItem extends React.Component {
           <span id={`campaignItem__end_time-${campaignItem.id}`}>{this.state.endTime}</span>
         </td>
         <td>
-          <span id={`campaignItem__banner_name-${campaignItem.id}`}>{this.getBannerName(campaignItem.banners_id)}</span>
+          <span id={`campaignItem__banner_name-${campaignItem.id}`}>{this.getBannerName(campaignItem.banner_id)}</span>
         </td>
         <td className="text-end">
           <button 

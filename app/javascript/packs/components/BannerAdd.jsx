@@ -16,7 +16,7 @@ class BannerAdd extends React.Component {
     e.preventDefault();
     setAxiosHeaders();
     axios
-      .post('/newbanner', {
+      .post('/api/v1/banners', {
         banner: {
           name: this.nameRef.current.value,
           text: this.textRef.current.value,

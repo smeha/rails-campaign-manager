@@ -9,14 +9,28 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import Moment from 'moment';
 
+const normalizeToHour = (date) => {
+  const normalizedDate = new Date(date)
+  normalizedDate.setMinutes(0, 0, 0)
+  return normalizedDate
+}
+
+const addHours = (date, hours) => {
+  const nextDate = new Date(date)
+  nextDate.setHours(nextDate.getHours() + hours)
+  return nextDate
+}
+
 class CampaignAdd extends React.Component {
   constructor(props) {
     super(props)
+    const currentHour = normalizeToHour(new Date())
     this.state = {
-      startDate: new Date(),
-      endDate: new Date(),
-      startTime: new Date(),
-      endTime: new Date(),
+      startDate: currentHour,
+      endDate: currentHour,
+      startTime: currentHour,
+      endTime: addHours(currentHour, 1),
+      errors: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameRef = React.createRef();
@@ -29,24 +43,34 @@ class CampaignAdd extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({ errors: [] });
     setAxiosHeaders();
     axios
-      .post('/newcampaign', {
+      .post('/api/v1/campaigns', {
         campaign: {
           name: this.nameRef.current.value,
-          end_date: Moment(this.state.endDate).format("DD/MM/yyyy"),          
-          start_date: Moment(this.state.startDate).format("DD/MM/yyyy"),
+          end_date: Moment(this.state.endDate).format("YYYY-MM-DD"),
+          start_date: Moment(this.state.startDate).format("YYYY-MM-DD"),
           start_time: Moment(this.state.startTime).format("HH:mm"),
           end_time: Moment(this.state.endTime).format("HH:mm"),
-          banners_id: this.banneridRef.current.value,
+          banner_id: this.banneridRef.current.value,
         },
       })
       .then(response => {
         const campaignItem = response.data
+        this.setState({
+          errors: [],
+          startDate: normalizeToHour(new Date()),
+          endDate: normalizeToHour(new Date()),
+          startTime: normalizeToHour(new Date()),
+          endTime: addHours(normalizeToHour(new Date()), 1),
+        })
         this.props.createCampaignItem(campaignItem)
+        this.nameRef.current.value = ""
       })
       .catch(error => {
-        console.log(error)
+        const errors = error.response?.data?.errors || [ "Unable to create campaign." ]
+        this.setState({ errors })
       })
     e.target.reset()
   }
@@ -63,13 +87,16 @@ class CampaignAdd extends React.Component {
     });
   }
   handleChangeStartTime(date){
+    const nextStartTime = normalizeToHour(date)
+    const nextEndTime = this.state.endTime <= nextStartTime ? addHours(nextStartTime, 1) : this.state.endTime
     this.setState({
-      startTime: date
+      startTime: nextStartTime,
+      endTime: nextEndTime
     });
   }
   handleChangeEndTime(date){
     this.setState({
-      endTime: date
+      endTime: normalizeToHour(date)
     });
   }
   render() {
@@ -81,6 +108,15 @@ class CampaignAdd extends React.Component {
             <h2 className="h4 mb-0">Schedule a banner campaign</h2>
           </div>
         </div>
+        {this.state.errors.length > 0 && (
+          <div className="alert alert-danger" role="alert">
+            <ul className="mb-0 ps-3">
+              {this.state.errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className="row g-3">
           <div className="col-lg-6">
             <label htmlFor="campaign-name" className="form-label">Name</label>
@@ -96,7 +132,7 @@ class CampaignAdd extends React.Component {
           </div> 
           <div className="col-lg-3">
             <label htmlFor="campaign-banner" className="form-label">Banner</label>
-            <select id="campaign-banner" name="banners_id" ref={this.banneridRef} className="form-select" required>
+            <select id="campaign-banner" name="banner_id" ref={this.banneridRef} className="form-select" required>
                 {this.props.bannerItems.map((obj) => {
                      return <option key={obj.id} value={obj.id}>{obj.name}</option>
                  })}
@@ -139,7 +175,7 @@ class CampaignAdd extends React.Component {
               onChange={this.handleChangeStartTime}
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={60}
               timeCaption="Time"
               dateFormat="h:mm aa"
               className="form-control"
@@ -152,7 +188,7 @@ class CampaignAdd extends React.Component {
               onChange={this.handleChangeEndTime}
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={60}
               timeCaption="Time"
               dateFormat="h:mm aa"
               className="form-control"

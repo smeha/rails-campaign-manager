@@ -9,7 +9,7 @@ class BannerItem extends React.Component {
     super(props)
 
     this.handleDestroy = this.handleDestroy.bind(this);
-    this.path = `/deletebanner/${this.props.bannerItem.id}`;
+    this.path = `/api/v1/banners/${this.props.bannerItem.id}`;
   }
 
   handleDestroy() {

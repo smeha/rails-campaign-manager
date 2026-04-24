@@ -46,7 +46,7 @@ class CampaignApp extends React.Component {
 	// }
 
 	getBannerItems() {
-		axios.get("/showbanner/")
+		axios.get("/api/v1/banners")
 		.then(response => {
 			const bannerItems = response.data;
 			this.setState({ bannerItems });
@@ -57,7 +57,7 @@ class CampaignApp extends React.Component {
 	}
 
 	getCampaignItems() {
-		axios.get("/showcampaign/")
+		axios.get("/api/v1/campaigns")
 		.then(response => {
 			const campaignItems = response.data;
 			this.setState({ campaignItems });

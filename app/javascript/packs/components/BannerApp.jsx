@@ -26,7 +26,7 @@ class BannerApp extends React.Component {
 	}
 
 	getBannerItems() {
-		axios.get("/showbanner/")
+		axios.get("/api/v1/banners")
 		.then(response => {
 			const bannerItems = response.data;
 			this.setState({ bannerItems });

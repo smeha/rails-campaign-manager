@@ -1,23 +1,20 @@
 Rails.application.routes.draw do
   root "cmanager#index"
   get "cmanager/index"
-
-  # ReactJS Callbacks somewhat API
-  get "/getuserid", to: "users#json_id_current_user"
-  post "/newcampaign", to: "campaigns#create_json"
-  get "/showcampaign", to: "campaigns#show_json"
-  delete "/deletecampaign/:id", to: "campaigns#destroy_json"
-  post "/newbanner", to: "banners#create_json"
-  get "/showbanner", to: "banners#show_json"
-  delete "/deletebanner/:id", to: "banners#destroy_json"
-  # Public URL for banners
   get "/publicbanner(/*ip)", to: "cmanager#get_public_banner", format: false
 
-  resources :users do
-    resources :campaigns
-    resources :banners
+  namespace :api do
+    namespace :v1 do
+      resource :current_user, only: :show
+      resources :campaigns, only: [ :index, :create, :destroy ]
+      resources :banners, only: [ :index, :create, :destroy ]
+    end
   end
-  # resources :campaigns
+
+  resources :users, only: [ :show, :new, :create ] do
+    resources :campaigns, only: :index
+    resources :banners, only: :index
+  end
 
   # Authentication
   get "/newuser", to: "users#new"

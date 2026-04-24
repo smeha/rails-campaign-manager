@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :campaigns, dependent: :destroy
   has_many :banners, dependent: :destroy
 
-  EMAIL_VALDATION_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i # Credit to stackoverflow
+  EMAIL_VALDATION_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   has_secure_password
   before_save { self.email = email.downcase }

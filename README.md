@@ -68,23 +68,29 @@ Seed user is email: `demo@example.com` password: `demo123`
 * It has an option of passing IP for gathering IP information in order to display proper banner
 * `/publicbanner/xxx.xxx.xxx.xxx`
 * Example: `/publicbanner/195.110.64.205`
+* The KeyCDN lookup now requires a `User-Agent` header in the format `keycdn-tools:https?://...`; use `KEYCDN_TOOLS_USER_AGENT` if you want to override the default value.
 
-### Unfinished API 
-Requires csrf token, in order to check the logged in
-* GET `/getuserid` - gets users ID
-* POST `/newcampaign` - create new campaign 
-* GET `/showcampaign` - displays all campaigns that belong to user
-* DELETE `/deletecampaign/:id` - deletes specific campaign specified by ID
-* POST `/newbanner` - create new banner 
-* GET `/showbanner` - displays all banners that belong to user
-* DELETE `/deletebanner/:id` - deletes specific banners specified by ID, attached campaigns will be deleted as well
+## API
+The admin frontend now uses a versioned JSON API under `/api/v1`. It uses the same session cookie and CSRF token as the Rails app.
 
-## Planned Implementation
-* Separate API instead of built in to controllers calls
-  * Still can be used with crsf login token 
-* Images/GIF/Videos need to be added to banner implementation
+### Admin API
+* GET `/api/v1/current_user` - returns the signed-in user
+* GET `/api/v1/campaigns` - lists the signed-in user's campaigns
+* POST `/api/v1/campaigns` - creates a campaign for the signed-in user
+* DELETE `/api/v1/campaigns/:id` - deletes one of the signed-in user's campaigns
+* GET `/api/v1/banners` - lists the signed-in user's banners
+* POST `/api/v1/banners` - creates a banner for the signed-in user
+* DELETE `/api/v1/banners/:id` - deletes one of the signed-in user's banners
 
-## Assignment 
+### Campaign payload notes
+* Use `banner_id` in JSON payloads instead of the legacy internal `banners_id` column name.
+* Campaign time windows are optional, but if present they must include both `start_time` and `end_time`.
+* Campaign time windows are validated on whole hours only, for example `09:00` and `17:00`.
+* Overnight windows are supported. For example, `23:00` to `00:00` or `23:00` to `02:00`.
+* If a time window crosses midnight, `end_date` must be later than `start_date`.
+* Overnight windows are date-aware: the late-night portion uses the current campaign date, and the after-midnight portion continues from the previous active date.
+
+## Original Assignment 
 The assignment was to build a super simple advertising platform. This application handles marketing campaigns on the internet. We will have Campaigns that will have banners on them.
 
 In order to be simple, campaigns will only need a name, a start date and an end date.
