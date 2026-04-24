@@ -14,11 +14,13 @@ FileUtils.chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
   puts '== Installing dependencies =='
-  system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
-  # Install JavaScript dependencies
-  # system('bin/yarn')
+  puts "\n== Installing JavaScript dependencies =="
+  system! 'npm install'
+
+  puts "\n== Building JavaScript assets =="
+  system! 'npm run build'
 
   # puts "\n== Copying sample files =="
   # unless File.exist?('config/database.yml')

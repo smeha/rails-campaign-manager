@@ -1,23 +1,19 @@
 {
   "name": "rails_campaign_manager",
   "private": true,
+  "scripts": {
+    "build": "esbuild app/javascript/frontend.js --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --loader:.js=jsx --loader:.jsx=jsx",
+    "build:watch": "esbuild app/javascript/frontend.js --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --loader:.js=jsx --loader:.jsx=jsx --watch"
+  },
   "dependencies": {
-    "@babel/preset-react": "^7.12.7",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.3.0",
-    "axios": "^0.21.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "@hotwired/turbo-rails": "^8.0.18",
+    "axios": "^1.15.2",
+    "esbuild": "^0.25.3",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-datepicker": "^3.3.0",
-    "react-dom": "^17.0.1",
-    "turbolinks": "^5.2.0"
+    "react-dom": "^17.0.1"
   },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
-  }
+  "version": "0.1.0"
 }

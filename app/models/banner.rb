@@ -1,6 +1,6 @@
 class Banner < ApplicationRecord
-	belongs_to :user
+  belongs_to :user
 
-	validates :name, presence: true
-	validates :text, presence: true
+  validates :name, presence: true
+  validates :text, presence: true
 end

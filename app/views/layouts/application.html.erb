@@ -5,8 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', 'frontend', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'frontend', 'data-turbo-track': 'reload', defer: true %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
   </head>
 
@@ -21,7 +21,7 @@
             <li class="mx-3"><%= link_to "Campaigns", user_campaigns_path(@user) %></li> 
             <li class="mx-3"><%= link_to "Banners", user_banners_path(@user) %></li> 
             <li class="mx-3"><%= link_to "User Profile", user_path(@user) %></li> 
-            <li class="mx-3"><%= link_to "Logout", logout_path, method: :delete %></li> 
+            <li class="mx-3"><%= link_to "Logout", logout_path, data: { turbo_method: :delete } %></li> 
         <% else %>
             <li class="mx-3"><%= link_to "New User Sign Up", newuser_path %></li>
             <li class="mx-3"><%= link_to "Login", login_path %></li>           

@@ -1,30 +1,45 @@
-## Installation and Environment Used
-* Mac OSX Catalina
-* Ruby through brew (the funky way now in Catalina)
-  * ruby 2.7.2p137
-* Rails 6.0.3.4
-* PostgreSQL 13.1
-* NodeJS v14.15.1 and Yarn 1.22.10 required for webpacker
+# Rails Campaign Manager
+## Tech Stack
+* Ruby (v3.4.8)
+* Rails (v8.1)
+* PostgreSQL (v18)
+* Bundler (4.0.10)
+* RSpec-Rails (v8.0)
+* Node.js and npm required for the JS build
 * ReactJS 17.0.1
 * BootStrap CSS 4.5.2
+* RuboCop (via rubocop-rails-omakase + rubocop-performance + rubocop-rspec)
 * https://tools.keycdn.com as external API for user's IP information
+
+## How to run locally
+### Prerequisites
+- Ruby 3.4.8 (`rbenv install 3.4.8`)
+- PostgreSQL running locally (`brew services start postgresql`)
+- Bundler
+
+### Install dependencies
+```bash
+bundle install
+npm install
+```
+
+### Setup database
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+### Run the project
+```bash
+rails s
+npm run build:watch
+```
 
 ## Usage
 
-`git clone https://github.com/smeha/rails-campaign-manager`
-
-`bundle install`
-
-`yarn install --check-files`
-
-`rails db:create`
-
-`rails db:migrate`
-
-`rails s`
-
 ### Test inputs aka seeds 
-Once application is ready to use. For simple prefilled inputs, use test seeds provided by me: `rails db:seed`
+Once application is ready to use. For simple prefilled inputs, use test seeds provided by seeds.
 
 Test user is email: `test@test.com` password: `test`
 
