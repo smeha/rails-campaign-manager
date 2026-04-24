@@ -6,8 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', 'frontend', media: 'all', 'data-turbo-track': 'reload' %>
-    <%= javascript_include_tag 'frontend', 'data-turbo-track': 'reload', defer: true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'frontend', media: 'all', 'data-turbo-track': 'reload' if built_asset_present?("frontend.css") %>
+    <%= javascript_include_tag 'frontend', 'data-turbo-track': 'reload', defer: true if built_asset_present?("frontend.js") %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" crossorigin="anonymous">
   </head>
 
