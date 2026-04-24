@@ -1,14 +1,10 @@
-<%#= @campaign.inspect %>
-<div class="container justify-content-center">
-	<h3 class='text-center'>If no time is set, only dates will be used for reference</h3>
-</div>
+<section class="page-section">
+  <div class="section-header">
+    <div>
+      <p class="hero-kicker">Campaigns</p>
+      <h1 class="h2 mb-2">Campaign workspace</h1>
+      <p class="text-secondary mb-0">If no time is set, the campaign is filtered only by its start and end dates.</p>
+    </div>
+  </div>
+</section>
 <div id="campaign-app"></div>
-<%# if @campaign.exists? %>
-<!-- 	<div class="container justify-content-center">
-		<h3 class='text-center'>
-			<label>Name: </label><%#= @campaign.name %>
-		</h3>
-	</div> -->
-<%# else %>
-	<!-- <div class="container justify-content-center"><h3 class='text-center'>No Campaigns</h3></div> -->
-<%# end %>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import axios from 'axios'
@@ -34,32 +34,40 @@ class BannerAdd extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="my-3 mx-4">
-        <div className="form-row">
-          <div className="form-group col-md-2">
+      <form onSubmit={this.handleSubmit} className="app-card panel-card">
+        <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-3">
+          <div>
+            <p className="hero-kicker mb-1">Create Banner</p>
+            <h2 className="h4 mb-0">Banner text library</h2>
+          </div>
+        </div>
+        <div className="row g-3 align-items-end">
+          <div className="col-lg-3">
+            <label htmlFor="banner-name" className="form-label">Name</label>
             <input
               type="text"
               name="name"
               ref={this.nameRef}
               required
               className="form-control"
-              id="name"
+              id="banner-name"
               placeholder="Banner name"
             />
-            </div>
-            <div className="form-group col-md-8">
+          </div>
+          <div className="col-lg-7">
+            <label htmlFor="banner-text" className="form-label">Text</label>
             <input
               type="text"
               name="text"
               ref={this.textRef}
               required
               className="form-control"
-              id="text"
+              id="banner-text"
               placeholder="Banner text"
             />
           </div>
-          <div className="form-group col-md-2">
-            <button className="btn btn-outline-success btn-block">
+          <div className="col-lg-2 d-grid">
+            <button className="btn btn-outline-success w-100">
               Add Banner
             </button>
           </div>

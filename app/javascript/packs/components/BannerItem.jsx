@@ -29,7 +29,7 @@ class BannerItem extends React.Component {
   render() {
     const { bannerItem } = this.props
     return (
-      <tr className='table-light'>
+      <tr>
         <td>
           <span id={`bannerItem__name-${bannerItem.id}`} >{bannerItem.name}</span>
         </td>
@@ -38,10 +38,10 @@ class BannerItem extends React.Component {
           {bannerItem.text}
           </p>
         </td>
-        <td className="text-right">          
+        <td className="text-end">
           <button 
           onClick={this.handleDestroy}
-          className="btn btn-outline-danger">Delete</button>
+          className="btn btn-sm btn-outline-danger">Delete</button>
         </td>
       </tr>
     )

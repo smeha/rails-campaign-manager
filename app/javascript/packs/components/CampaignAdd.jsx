@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import axios from 'axios'
@@ -74,36 +74,42 @@ class CampaignAdd extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="my-3 mx-4">
-        <div className="form-row">
-          <div className="form-group col-md-6">
+      <form onSubmit={this.handleSubmit} className="app-card panel-card">
+        <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-3">
+          <div>
+            <p className="hero-kicker mb-1">Create Campaign</p>
+            <h2 className="h4 mb-0">Schedule a banner campaign</h2>
+          </div>
+        </div>
+        <div className="row g-3">
+          <div className="col-lg-6">
+            <label htmlFor="campaign-name" className="form-label">Name</label>
             <input
               type="text"
               name="name"
               ref={this.nameRef}
               required
               className="form-control"
-              id="name"
+              id="campaign-name"
               placeholder="Campaign name"
             />
           </div> 
-          <div className="form-group col-md-5">
-            <button className="btn btn-outline-success btn-block">
-              Add Campaign
-            </button>
-          </div>
-        </div>
-        <div className="form-row form-inline">
-        <div className="form-group col-md-2"> 
-            <label className="mx-1">Select Banner</label>   
-            <select name="banners_id" ref={this.banneridRef} className="form-control" required>
+          <div className="col-lg-3">
+            <label htmlFor="campaign-banner" className="form-label">Banner</label>
+            <select id="campaign-banner" name="banners_id" ref={this.banneridRef} className="form-select" required>
                 {this.props.bannerItems.map((obj) => {
                      return <option key={obj.id} value={obj.id}>{obj.name}</option>
                  })}
-             </select>    
-        </div>
-        <div className="form-group col-md-2">
-            <label className="mx-1">Start Date</label>
+             </select>
+          </div>
+          <div className="col-lg-3 d-grid">
+            <label className="form-label d-none d-lg-block">&nbsp;</label>
+            <button className="btn btn-outline-success w-100">
+              Add Campaign
+            </button>
+          </div>
+          <div className="col-md-6 col-lg-3">
+            <label className="form-label">Start Date</label>
             <DatePicker
               selected={ this.state.startDate }
               onChange={this.handleChangeStartDate }
@@ -111,10 +117,11 @@ class CampaignAdd extends React.Component {
               minDate={Moment().toDate()}
               required
               dateFormat="MM/dd/yyyy"
+              className="form-control"
             />
           </div>
-          <div className="form-group col-md-2">
-            <label className="mx-1">End Date</label>
+          <div className="col-md-6 col-lg-3">
+            <label className="form-label">End Date</label>
             <DatePicker
               selected={ this.state.endDate }
               onChange={ this.handleChangeEndDate }
@@ -122,10 +129,11 @@ class CampaignAdd extends React.Component {
               minDate={Moment().toDate()}
               required
               dateFormat="MM/dd/yyyy"
+              className="form-control"
             />
           </div>
-          <div className="form-group col-md-2">
-            <label className="mx-1">Start Time</label>
+          <div className="col-md-6 col-lg-3">
+            <label className="form-label">Start Time</label>
             <DatePicker
               selected={this.state.startTime}
               onChange={this.handleChangeStartTime}
@@ -134,10 +142,11 @@ class CampaignAdd extends React.Component {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="h:mm aa"
+              className="form-control"
             />
           </div>
-          <div className="form-group col-md-2">
-            <label className="mx-1">End Time</label>
+          <div className="col-md-6 col-lg-3">
+            <label className="form-label">End Time</label>
             <DatePicker
               selected={this.state.endTime}
               onChange={this.handleChangeEndTime}
@@ -146,6 +155,7 @@ class CampaignAdd extends React.Component {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="h:mm aa"
+              className="form-control"
             />
           </div>
         </div>

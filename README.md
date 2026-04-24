@@ -3,11 +3,11 @@
 * Ruby (v3.4.8)
 * Rails (v8.1)
 * PostgreSQL (v18)
-* Bundler (4.0.10)
+* Bundler (v4.0.10)
 * RSpec-Rails (v8.0)
-* Node.js and npm required for the JS build
-* ReactJS 19.2.5
-* BootStrap CSS 4.5.2
+* Node.js (v24.14)
+* ReactJS (v19.2.5)
+* BootStrap CSS (v5.3.8)
 * RuboCop (via rubocop-rails-omakase + rubocop-performance + rubocop-rspec)
 * https://tools.keycdn.com as external API for user's IP information
 

@@ -1,17 +1,28 @@
-<!-- Form layout and styling is curtouisy of stackoverflow -->
-<h1 class='text-center'>Login</h1>
-<div class="row">
-  <div class="col-md-6 offset-3">
-    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+<section class="auth-shell">
+  <div class="app-card auth-card">
+    <div class="mb-4 text-center">
+      <p class="hero-kicker">Welcome Back</p>
+      <h1 class="h2 mb-2">Login</h1>
+      <p class="text-secondary mb-0">Use your account to manage banners and campaigns.</p>
+    </div>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+    <%= form_with(url: login_path, scope: :session, local: true, class: "vstack gap-3") do |f| %>
+      <div>
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, class: "form-control form-control-lg", autofocus: true %>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <div>
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, class: "form-control form-control-lg" %>
+      </div>
 
-      <%= f.submit "Log in", class: " mt-2 btn btn-primary" %>
+      <%= f.submit "Log in", class: "btn btn-primary btn-lg w-100 mt-2" %>
     <% end %>
 
+    <p class="text-center text-secondary mt-4 mb-0">
+      Need an account?
+      <%= link_to "Create one", newuser_path, class: "text-decoration-none" %>
+    </p>
   </div>
-</div>
+</section>

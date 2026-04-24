@@ -1,8 +1,12 @@
-<div class="container justify-content-center">
-	<h3 class='text-center'>
-		<label>Name: </label><%= @user.name %>
-	</h3>
-	<h3 class='text-center'>
-		<label>E-mail: </label><%= @user.email %>
-	</h3>
-</div>
+<section class="profile-shell">
+  <div class="app-card profile-card">
+    <p class="hero-kicker">Account</p>
+    <h1 class="h2 mb-4"><%= @user.name %></h1>
+    <dl class="row mb-0">
+      <dt class="col-sm-3 text-secondary">Name</dt>
+      <dd class="col-sm-9"><%= @user.name %></dd>
+      <dt class="col-sm-3 text-secondary">Email</dt>
+      <dd class="col-sm-9 mb-0"><%= @user.email %></dd>
+    </dl>
+  </div>
+</section>

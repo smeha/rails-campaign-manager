@@ -1,15 +1,232 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+:root {
+  --app-bg: #f3f4ee;
+  --app-surface: #fffdf8;
+  --app-text: #1d2b28;
+  --app-muted: #6b7572;
+  --app-border: rgba(29, 43, 40, 0.12);
+  --app-primary: #1f6b52;
+  --app-primary-dark: #174f3d;
+  --app-shadow: 0 22px 50px rgba(25, 42, 35, 0.08);
+  --app-radius: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.app-shell {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--app-text);
+  background:
+    radial-gradient(circle at top left, rgba(217, 185, 122, 0.18), transparent 32rem),
+    linear-gradient(180deg, #fbfaf5 0%, var(--app-bg) 100%);
+}
+
+body,
+input,
+button,
+select,
+textarea {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.app-navbar {
+  padding: 1rem 0;
+  background: rgba(18, 39, 33, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.app-brand,
+.app-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.app-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.app-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus,
+.app-brand:hover,
+.app-brand:focus {
+  color: #ffffff;
+}
+
+.app-main {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.app-flash {
+  border: 0;
+  border-radius: 16px;
+  box-shadow: var(--app-shadow);
+}
+
+.hero-card,
+.app-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 253, 248, 0.94));
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.hero-card {
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.app-card {
+  padding: 1.5rem;
+}
+
+.compact-card {
+  padding: 1.75rem;
+}
+
+.page-section,
+.profile-shell,
+.auth-shell {
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hero-kicker {
+  margin-bottom: 0.5rem;
+  color: var(--app-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auth-shell {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.auth-card,
+.profile-card {
+  padding: 2rem;
+}
+
+.info-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--app-muted);
+}
+
+.info-list li + li {
+  margin-top: 0.75rem;
+}
+
+.panel-card {
+  margin-bottom: 1.5rem;
+}
+
+.table-responsive {
+  border-radius: 18px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-bottom-width: 1px;
+  color: var(--app-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.form-control,
+.form-select {
+  border-color: rgba(31, 107, 82, 0.18);
+  border-radius: 14px;
+  min-height: 3rem;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(31, 107, 82, 0.45);
+  box-shadow: 0 0 0 0.25rem rgba(31, 107, 82, 0.12);
+}
+
+.btn-primary {
+  border-color: var(--app-primary);
+  background-color: var(--app-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border-color: var(--app-primary-dark);
+  background-color: var(--app-primary-dark);
+}
+
+.btn-outline-secondary {
+  color: var(--app-primary);
+  border-color: rgba(31, 107, 82, 0.28);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: #fff;
+  background-color: var(--app-primary);
+  border-color: var(--app-primary);
+}
+
+.btn-outline-danger,
+.btn-outline-success {
+  border-radius: 12px;
+}
+
+code {
+  color: var(--app-primary-dark);
+}
+
+@media (max-width: 767.98px) {
+  .hero-card,
+  .auth-card,
+  .profile-card,
+  .app-card {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .app-main {
+    padding-top: 1.25rem;
+  }
+
+  .app-nav-list {
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+}

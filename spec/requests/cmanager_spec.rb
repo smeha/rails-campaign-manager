@@ -6,6 +6,7 @@ RSpec.describe "Campaign manager", type: :request do
       get root_path
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Manage banners and campaigns from one small dashboard.")
     end
   end
 
@@ -14,6 +15,7 @@ RSpec.describe "Campaign manager", type: :request do
       get cmanager_index_path
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("How it works")
     end
   end
 end

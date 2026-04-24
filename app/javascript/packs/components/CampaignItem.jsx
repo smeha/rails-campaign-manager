@@ -47,7 +47,7 @@ class CampaignItem extends React.Component {
   render() {
     const { campaignItem } = this.props
     return (
-      <tr className='table-light'>
+      <tr>
         <td>
           <span id={`campaignItem__name-${campaignItem.id}`}>{campaignItem.name}</span>
         </td>
@@ -66,10 +66,10 @@ class CampaignItem extends React.Component {
         <td>
           <span id={`campaignItem__banner_name-${campaignItem.id}`}>{this.getBannerName(campaignItem.banners_id)}</span>
         </td>
-        <td className="text-right">          
+        <td className="text-end">
           <button 
           onClick={this.handleDestroy}
-          className="btn btn-outline-danger">Delete</button>
+          className="btn btn-sm btn-outline-danger">Delete</button>
         </td>
       </tr>
     )

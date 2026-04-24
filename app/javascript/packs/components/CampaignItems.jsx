@@ -1,15 +1,11 @@
 import React from 'react'
 
 class CampaignItems extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
-      <>
+      <div className="app-card panel-card">
         <div className="table-responsive">
-          <table className="table">
+          <table className="table table-hover align-middle">
             <thead>
               <tr>
                 <th scope="col">Name</th>
@@ -24,7 +20,7 @@ class CampaignItems extends React.Component {
             <tbody>{this.props.children}</tbody>
           </table>
         </div>
-      </>
+      </div>
     )
   }
 }
